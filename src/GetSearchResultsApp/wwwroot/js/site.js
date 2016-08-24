@@ -1,4 +1,4 @@
-﻿var SearchResultApp = (function(H, W) {
+﻿var SearchResultApp = (function(H, U, W) {
     "use strict";
 
     var form,
@@ -18,7 +18,7 @@
 
     function _appendElementAsQueryString(url, element) {
         if (!element || !url) return url;
-        return Utilities.updateQueryStringParameter(url, encodeURIComponent(element.name), encodeURIComponent(element.value));
+        return U.updateQueryStringParameter(url, encodeURIComponent(element.name), encodeURIComponent(element.value));
     }
 
     function _getRequestUrl() {
@@ -30,29 +30,29 @@
         url = _appendElementAsQueryString(url, zipCodeElement);
 
         if (estimateRentElement.checked) {
-            url = Utilities.updateQueryStringParameter(url, encodeURIComponent(estimateRentElement.name), "true");
+            url = U.updateQueryStringParameter(url, encodeURIComponent(estimateRentElement.name), "true");
         }
 
         return url;
     }
 
     function _addErrorMessage(errorMessage) {
-        if (Utilities.isNullOrWhitespace(errorMessage)) return;
+        if (U.isNullOrWhitespace(errorMessage)) return;
         errorMessagesUl.insertAdjacentHTML("beforeend", "<li>" + errorMessage + "</li>");
     }
 
     function _validateForm() {
         var valid = true, errorMessages = [];
 
-        Utilities.removeAllChildElements(errorMessagesUl);
+        U.removeAllChildElements(errorMessagesUl);
 
-        if (Utilities.isNullOrWhitespace(addressLineElement.value)) {
+        if (U.isNullOrWhitespace(addressLineElement.value)) {
             valid = false;
             errorMessages.push("Address line required");
         }
 
         //Poor mans validation for now. 
-        if (Utilities.isNullOrWhitespace(cityElement.value + stateElement.value + zipCodeElement.value)) {
+        if (U.isNullOrWhitespace(cityElement.value + stateElement.value + zipCodeElement.value)) {
             valid = false;
             errorMessages.push("More information required");
         }
@@ -98,7 +98,7 @@
     function _handleSearchResponse() {
         var xhr = this;
         spinner.className += "hidden";
-        Utilities.removeAllChildElements(searchResultContainer);
+        U.removeAllChildElements(searchResultContainer);
 
         if (xhr.status !== 200) {
             _addErrorMessage(generalErrorMessage);
@@ -157,40 +157,4 @@
     }
 
     return self;
-})(Handlebars, window);
-
-
-var Utilities = (function(W) {
-    "use strict";
-    var self = {
-        updateQueryStringParameter: function(uri, key, value) { return _updateQueryStringParameter(uri, key, value); },
-        isNullOrWhitespace: function(input) { return _isNullOrWhitespace(input); },
-        removeAllChildElements: function(element) { return _removeAllChildElements(element); }
-    }
-
-    function _isNullOrWhitespace(input) {
-        return (!input) || (input.replace(/\s/g, "").length < 1);
-    }
-
-    function _updateQueryStringParameter(uri, key, value) {
-        if (!uri || !key) return uri;
-
-        //http://stackoverflow.com/a/6021027/321035
-        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-        var separator = uri.indexOf("?") !== -1 ? "&" : "?";
-        if (uri.match(re)) {
-            return uri.replace(re, "$1" + key + "=" + value + "$2");
-        } else {
-            return uri + separator + key + "=" + value;
-        }
-    }
-
-    function _removeAllChildElements(element) {
-        if (!element) return;
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
-        }
-    }
-
-    return self;
-})(window);
+})(Handlebars, Utilities, window);
