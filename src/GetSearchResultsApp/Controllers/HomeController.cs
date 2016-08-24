@@ -22,18 +22,18 @@ namespace GetSearchResultsApp.Controllers
 
         public async Task<JsonResult> Search(SearchRequest request)
         {
-            SearchResponse response;
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                response = await _searchRepository.SearchAsync(request);
-            }
-            else
-            {
-                response = new SearchResponse
+                var errorResponse = new SearchResponse
                 {
-                    ErrorMessages = ModelState?.SelectMany(m => m.Value.Errors)?.Select(e => e.ErrorMessage)?.ToArray()
+                    ErrorMessages = ModelState.Values.SelectMany(m => m.Errors)
+                        .Where(e => e != null).Select(e => e.ErrorMessage)
+                        .ToArray()
                 };
+                return Json(errorResponse);
             }
+
+            var response = await _searchRepository.SearchAsync(request);
 
             return Json(response);
         }
@@ -42,6 +42,5 @@ namespace GetSearchResultsApp.Controllers
         {
             return View();
         }
-
     }
 }
