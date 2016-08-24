@@ -1,0 +1,55 @@
+﻿@model GetSearchResultsApp.ViewModels.SearchRequest
+@inject IHtmlHelper<GetSearchResultsApp.ViewModels.SearchRequest> Html
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row margin-top-10">
+
+    <form id="searchForm" asp-controller="Home" asp-action="Search" method="get" class="form-inline">
+        <div class="form-group">
+            <label asp-for="AddressLine" class="sr-only"></label>
+            <input id="addressLineText" asp-for="AddressLine" placeholder="@Html.DisplayNameFor(m => m.AddressLine)" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="City" class="sr-only"></label>
+            <input id="cityText" asp-for="City" placeholder="@Html.DisplayNameFor(m => m.City)" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="State" class="sr-only"></label>
+            <input id="stateText" asp-for="State" placeholder="@Html.DisplayNameFor(m => m.State)" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ZipCode" class="sr-only"></label>
+            <input id="zipCodeText" asp-for="ZipCode" placeholder="@Html.DisplayNameFor(m => m.ZipCode)" class="form-control"/>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input id="estimateRentCheckbox" asp-for="ZestimateRent"/> @Html.DisplayNameFor(m => m.ZestimateRent)
+            </label>
+        </div>
+        <button id="searchButton" type="submit" class="btn btn-primary">Search</button>
+        <img id="spinner" alt="spinner" class="hidden" src="~/images/spinner.gif"/>
+
+        <div id="validationMessages" asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>
+<div id="searchResultContainer">
+    
+</div>
+@section scripts{
+
+    @{
+        Html.RenderPartial("_SearchResultTemplate");
+    }
+
+    <script type="text/javascript">
+        SearchResultApp && SearchResultApp.initialize();
+    </script>
+}
+

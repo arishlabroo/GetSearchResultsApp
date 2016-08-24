@@ -1,0 +1,97 @@
+﻿<script id="searchResultTemplate" type="text/x-handlebars-template">
+    {{#each .}}
+        <div class="row row-shadow">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <address>
+                            {{#with searchResultAddress}}
+                                <h4>{{street}}</h4>
+                                <h4>{{city}}, {{state}} {{zipCode}}</h4>
+                            {{/with}}
+                        </address>
+                    </div>
+                    <div class="panel-body text-center">
+                        <div class="row">
+                            <small>{{searchResultAddress.latitude}}, {{searchResultAddress.longitude}}</small>
+                        </div>
+                        {{#with searchResultLinks}}
+                            <div class="row">
+                                <a target="_blank" href="{{comparablesLinks}}">Comparable Properties</a>
+                            </div>
+                            <div class="row">
+                                <a target="_blank" href="{{graphsAndDataLink}}">Graphs And Data</a>
+                            </div>
+                            <div class="row">
+                                <a target="_blank" href="{{homeDetailsLink}}">Home Details</a>
+                            </div>
+                            <div class="row">
+                                <a target="_blank" href="{{mapThisHomeLink}}">Map This</a>
+                            </div>
+                        {{/with}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Zestimate</div>
+                    <div class="panel-body text-center">
+                        {{#with zestimate}}
+                            <div class="row">Amount: {{currency}} {{amount}}</div>
+                            <div class="row">Range: {{currency}} {{lowValuation}} - {{highValuation}}</div>
+                            <div class="row">
+                                Change in {{valueChangeDuration}} days
+                                <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
+                                    {{valueChange}}
+                                </span>
+                            </div>
+                        {{/with}}
+                    </div>
+                </div>
+
+                {{#if rentZestimate}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Rent Zestimate</div>
+                        <div class="panel-body text-center">
+                            {{#with rentZestimate}}
+                                <div class="row">Amount: {{currency}} {{amount}}</div>
+                                <div class="row">Range: {{currency}} {{lowValuation}} - {{highValuation}}</div>
+                                <div class="row">
+                                    Change in {{valueChangeDuration}} days
+                                    <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
+                                        {{valueChange}}
+                                    </span>
+                                </div>
+                            {{/with}}
+                        </div>
+                    </div>
+                {{/if}}
+
+            </div>
+            <div class="col-md-4">
+                {{#each localRegions}}
+                    {{#with this}}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a target="_blank" href="{{overViewLink}}">
+                                    <small class="text-capitalize">{{type}}</small>: <strong>{{name}}</strong>
+                                </a>
+                            </div>
+                            <div class="panel-body text-center">
+                                <div class="row">
+                                    ZIndex Value: {{#if zindexValue}}{{zindexValue}}{{else}}None{{/if}}
+                                </div>
+                                <div class="row">
+                                    <a target="_blank" href="{{forSaleLink}}">For Sale</a>
+                                </div>
+                                <div class="row">
+                                    <a target="_blank" href="{{forSaleByOwnerLink}}">For Sale By Owners</a>
+                                </div>
+                            </div>
+                        </div>
+                    {{/with}}
+                {{/each}}
+            </div>
+        </div>
+    {{/each}}
+</script>
