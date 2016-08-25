@@ -68,6 +68,8 @@ namespace GetSearchResultsApp.ViewModels
         public string Name { get; set; }
         public uint Id { get; set; }
         public decimal? ZindexValue { get; set; }
+        public string ZindexValueString { get; set; }
+
         public decimal? ZindexOneYearChange { get; set; }
 
         public string OverViewLink { get; set; }

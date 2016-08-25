@@ -125,9 +125,10 @@ namespace GetSearchResultsApp.Model
                 Name = region.name,
                 Id = region.id,
                 Type = region.type,
-                ZindexValue = SafeConvertToDecimal(region.zindexValue)
-
+                ZindexValue = SafeConvertToDecimal(region.zindexValue),
             };
+
+            mappedRegion.ZindexValueString = ToCurrencyString(mappedRegion.ZindexValue);
 
             if (region.links != null)
             {
@@ -137,7 +138,6 @@ namespace GetSearchResultsApp.Model
             }
 
             return mappedRegion;
-
         }
 
         private static decimal? SafeConvertToDecimal(string input)
