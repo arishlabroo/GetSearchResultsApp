@@ -9,6 +9,9 @@ using NUnit.Framework;
 
 namespace GetSearchResultsApp.Tests
 {
+    //NOTE: THIS IS NOT A COMPREHENSIVE TEST SUITE. 
+    //Just added a couple of tests for example.
+
     [TestFixture]
     public class XmlResponseMapperTests
     {
