@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace GetSearchResultsApp.ViewModels
 {
+    /// <summary>
+    /// Viewmodel to decouple service entities from the view.
+    /// </summary>
     public class SearchResponse
     {
         public string[] ErrorMessages { get; set; }
@@ -14,11 +17,11 @@ namespace GetSearchResultsApp.ViewModels
     public class SearchResult
     {
         public uint ZpId { get; set; }
-        public SearchResultLinks SearchResultLinks { get; set; }
-        public SearchResultAddress SearchResultAddress { get; set; }
+        public SearchResultLinks Links { get; set; }
+        public SearchResultAddress Address { get; set; }
         public SearchResultZestimate Zestimate { get; set; }
         public SearchResultZestimate RentZestimate { get; set; }
-        public List<LocalRegion> LocalRegions { get; set; }
+        public List<SearchResultLocalRegion> LocalRegions { get; set; }
     }
 
     public class SearchResultLinks
@@ -52,7 +55,7 @@ namespace GetSearchResultsApp.ViewModels
         public bool? ValueDown { get; set; }
     }
 
-    public class LocalRegion
+    public class SearchResultLocalRegion
     {
         public string Type { get; set; }
         public string Name { get; set; }

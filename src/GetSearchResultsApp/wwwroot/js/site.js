@@ -56,6 +56,7 @@
             valid = false;
             errorMessages.push("More information required");
         }
+
         if (!valid) {
             for (var i in errorMessages) {
                 if (errorMessages.hasOwnProperty(i)) {
@@ -89,6 +90,7 @@
         }
 
         if (!template) {
+            //Cache template
             template = H.compile(document.getElementById("searchResultTemplate").innerHTML);
         }
 
@@ -138,6 +140,7 @@
     }
 
     function _cacheElementReferences() {
+        //Since there are only a handfull of elements I am caching them all upfront during initialize.
         form = document.getElementById("searchForm");
         searchButton = document.getElementById("searchButton");
         addressLineElement = document.getElementById("addressLineText");

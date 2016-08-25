@@ -1,21 +1,21 @@
 ﻿<script id="searchResultTemplate" type="text/x-handlebars-template">
     {{#each .}}
-        <div class="row row-shadow">
-            <div class="col-md-4">
+        <div class="row row-shadow margin-top-10">
+            <div class="col-md-4  text-center">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <address>
-                            {{#with searchResultAddress}}
+                            {{#with address}}
                                 <h4>{{street}}</h4>
                                 <h4>{{city}}, {{state}} {{zipCode}}</h4>
                             {{/with}}
                         </address>
                     </div>
-                    <div class="panel-body text-center">
+                    <div class="panel-body">
                         <div class="row">
-                            <small>{{searchResultAddress.latitude}}, {{searchResultAddress.longitude}}</small>
+                            <small>{{address.latitude}}, {{address.longitude}}</small>
                         </div>
-                        {{#with searchResultLinks}}
+                        {{#with links}}
                             <div class="row">
                                 <a target="_blank" href="{{comparablesLinks}}">Comparable Properties</a>
                             </div>
@@ -32,19 +32,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4  text-center">
                 <div class="panel panel-default">
                     <div class="panel-heading">Zestimate</div>
-                    <div class="panel-body text-center">
+                    <div class="panel-body">
                         {{#with zestimate}}
                             <div class="row">Amount: {{currency}} {{amount}}</div>
                             <div class="row">Range: {{currency}} {{lowValuation}} - {{highValuation}}</div>
-                            <div class="row">
-                                Change in {{valueChangeDuration}} days
-                                <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
-                                    {{valueChange}}
-                                </span>
-                            </div>
+                            {{#if valueChangeDuration}}    
+                                <div class="row">
+                                    Change in {{valueChangeDuration}} days
+                                    <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
+                                        {{valueChange}}
+                                    </span>
+                                </div>
+                            {{/if}}
                         {{/with}}
                     </div>
                 </div>
@@ -56,19 +58,21 @@
                             {{#with rentZestimate}}
                                 <div class="row">Amount: {{currency}} {{amount}}</div>
                                 <div class="row">Range: {{currency}} {{lowValuation}} - {{highValuation}}</div>
-                                <div class="row">
-                                    Change in {{valueChangeDuration}} days
-                                    <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
-                                        {{valueChange}}
-                                    </span>
-                                </div>
+                                {{#if valueChangeDuration}}    
+                                    <div class="row">
+                                        Change in {{valueChangeDuration}} days
+                                        <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
+                                            {{valueChange}}
+                                        </span>
+                                    </div>
+                                {{/if}}
                             {{/with}}
                         </div>
                     </div>
                 {{/if}}
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4  text-center">
                 {{#each localRegions}}
                     {{#with this}}
                         <div class="panel panel-default">
@@ -77,7 +81,7 @@
                                     <small class="text-capitalize">{{type}}</small>: <strong>{{name}}</strong>
                                 </a>
                             </div>
-                            <div class="panel-body text-center">
+                            <div class="panel-body">
                                 <div class="row">
                                     ZIndex Value: {{#if zindexValue}}{{zindexValue}}{{else}}None{{/if}}
                                 </div>

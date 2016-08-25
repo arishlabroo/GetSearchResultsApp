@@ -1,5 +1,8 @@
 namespace GetSearchResultsApp.Model
 {
+    /// <summary>
+    /// Event ids for logging
+    /// </summary>
     public static class SearchEvents
     {
         public const int RequestProcessing = 1;

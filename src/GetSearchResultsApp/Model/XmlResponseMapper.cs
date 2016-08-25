@@ -6,6 +6,10 @@ using GetSearchResultsApp.ViewModels;
 
 namespace GetSearchResultsApp.Model
 {
+    /// <summary>
+    /// Maps the raw XML reponse to the viewmodel.
+    /// </summary>
+    /// <seealso cref="GetSearchResultsApp.Model.Interfaces.ISearchResponseMapper" />
     public class XmlResponseMapper : ISearchResponseMapper
     {
         private readonly IZillowTypeMapper _zillowTypeMapper;

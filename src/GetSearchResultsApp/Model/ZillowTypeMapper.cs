@@ -4,6 +4,10 @@ using GetSearchResultsApp.ViewModels;
 
 namespace GetSearchResultsApp.Model
 {
+    /// <summary>
+    /// Maps the zillow type to the viewmodel type
+    /// </summary>
+    /// <seealso cref="GetSearchResultsApp.Model.Interfaces.IZillowTypeMapper" />
     public class ZillowTypeMapper : IZillowTypeMapper
     {
         public SearchResponse MapSearchResponse(searchresults searchresults)
@@ -38,8 +42,8 @@ namespace GetSearchResultsApp.Model
             return new SearchResult
             {
                 ZpId = simpleProperty.zpid,
-                SearchResultAddress = MapAddress(simpleProperty.address),
-                SearchResultLinks = MapLinks(simpleProperty.links),
+                Address = MapAddress(simpleProperty.address),
+                Links = MapLinks(simpleProperty.links),
                 Zestimate = MapEstimate(simpleProperty.zestimate),
                 RentZestimate = MapEstimate(simpleProperty.rentzestimate),
                 LocalRegions = simpleProperty.localRealEstate?.Select(MapRegion)?.ToList()
@@ -102,11 +106,11 @@ namespace GetSearchResultsApp.Model
             return estimate;
         }
 
-        private static LocalRegion MapRegion(LocalRealEstateRegion region)
+        private static SearchResultLocalRegion MapRegion(LocalRealEstateRegion region)
         {
             if (region == null) return null;
 
-            var mappedRegion = new LocalRegion
+            var mappedRegion = new SearchResultLocalRegion
             {
                 Name = region.name,
                 Id = region.id,

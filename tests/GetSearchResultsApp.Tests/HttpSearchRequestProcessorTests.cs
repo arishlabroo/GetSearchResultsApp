@@ -16,7 +16,7 @@ namespace GetSearchResultsApp.Tests
     [TestFixture]
     public class HttpSearchRequestProcessorTests
     {
-        const string CityStateZipParamName = "citystatezip";
+        private const string CityStateZipParamName = "citystatezip";
         private Mock<IHttpClientWrapper> _mockHttpClient;
         private Mock<IOptions<ZillowServiceSettings>> _mockOptions;
         private Mock<ILogger<HttpSearchRequestProcessor>> _mockLogger;
@@ -28,12 +28,7 @@ namespace GetSearchResultsApp.Tests
             _mockHttpClient = new Mock<IHttpClientWrapper>();
             _mockLogger = new Mock<ILogger<HttpSearchRequestProcessor>>();
             _mockOptions = new Mock<IOptions<ZillowServiceSettings>>();
-        }
 
-        [Test]
-        public async Task SearchAsync_CalculatesValid_CityStateZipParameter()
-        {
-            //Arrange
             _mockHttpClient.Setup(m => m.GetAsync(It.IsAny<Uri>()))
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK) {Content = new StringContent("Hello")});
 
@@ -42,8 +37,35 @@ namespace GetSearchResultsApp.Tests
                 SearchServiceUrl = "http://happybirthdaytoyou.com",
                 ZwsId = "IMeMyself"
             });
+        }
+
+        [Test]
+        public async Task SearchAsync_UrlEncodes_AllParameters()
+        {
+            //Arrange
+            var sut = new HttpSearchRequestProcessor(_mockOptions.Object, _mockHttpClient.Object, _mockLogger.Object);
+            
+            var request = new SearchRequest
+            {
+                AddressLine = "apple",
+                ZipCode = "92+: 618",
+                ZestimateRent = false
+            };
+
+            const string query = "?zws-id=IMeMyself&address=apple&citystatezip=92%2B%3A%20618&rentzestimate=False";
+
+            //Act
+            var stringResponse = await sut.SearchAsync(request);
+
+            //Assert
+            _mockHttpClient.Verify(h => h.GetAsync(It.Is<Uri>(u => u.Query == query)), Times.Once);
+        }
 
 
+        [Test]
+        public async Task SearchAsync_CalculatesValid_CityStateZipParameter()
+        {
+            //Arrange
             var sut = new HttpSearchRequestProcessor(_mockOptions.Object, _mockHttpClient.Object, _mockLogger.Object);
 
             var request = new SearchRequest
@@ -56,7 +78,6 @@ namespace GetSearchResultsApp.Tests
 
 
             //Act
-
             var stringResponse = await sut.SearchAsync(request);
 
             //Assert

@@ -1,9 +1,16 @@
 ﻿var Utilities = (function(W) {
     "use strict";
+
     var self = {
-        updateQueryStringParameter: function(uri, key, value) { return _updateQueryStringParameter(uri, key, value); },
-        isNullOrWhitespace: function(input) { return _isNullOrWhitespace(input); },
-        removeAllChildElements: function(element) { return _removeAllChildElements(element); }
+        updateQueryStringParameter: function(uri, key, value) {
+            return _updateQueryStringParameter(uri, key, value);
+        },
+        isNullOrWhitespace: function(input) {
+            return _isNullOrWhitespace(input);
+        },
+        removeAllChildElements: function(element) {
+            return _removeAllChildElements(element);
+        }
     }
 
     function _isNullOrWhitespace(input) {

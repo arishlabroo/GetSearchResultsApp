@@ -10,6 +10,10 @@ using Microsoft.Extensions.Options;
 
 namespace GetSearchResultsApp.Model
 {
+    /// <summary>
+    /// An implementation of the request processor which uses HTTP
+    /// </summary>
+    /// <seealso cref="GetSearchResultsApp.Model.Interfaces.ISearchRequestProcessor" />
     public class HttpSearchRequestProcessor : ISearchRequestProcessor
     {
         private const string WhiteSpace = " ";

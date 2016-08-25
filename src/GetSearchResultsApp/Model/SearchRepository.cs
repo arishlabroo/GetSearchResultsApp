@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GetSearchResultsApp.Model
 {
+    /// <seealso cref="GetSearchResultsApp.Model.Interfaces.ISearchRepository" />
     public class SearchRepository : ISearchRepository
     {
         private readonly ISearchRequestProcessor _requestProcessor;

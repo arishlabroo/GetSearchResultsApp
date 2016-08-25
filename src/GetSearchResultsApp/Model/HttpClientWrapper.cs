@@ -5,6 +5,7 @@ using GetSearchResultsApp.Model.Interfaces;
 
 namespace GetSearchResultsApp.Model
 {
+    /// <seealso cref="GetSearchResultsApp.Model.Interfaces.IHttpClientWrapper" />
     public class HttpClientWrapper : IHttpClientWrapper
     {
         public async Task<HttpResponseMessage> GetAsync(Uri uri)

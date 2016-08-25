@@ -1,5 +1,6 @@
-﻿@model GetSearchResultsApp.ViewModels.SearchRequest
-@inject IHtmlHelper<GetSearchResultsApp.ViewModels.SearchRequest> Html
+﻿@using GetSearchResultsApp.ViewModels
+@model SearchRequest
+@inject IHtmlHelper<SearchRequest> Html
 
 @{
     ViewData["Title"] = "Home Page";
@@ -39,9 +40,11 @@
         <div id="validationMessages" asp-validation-summary="All" class="text-danger"></div>
     </form>
 </div>
+
 <div id="searchResultContainer">
-    
+    @*The templated search response is inserted here*@
 </div>
+
 @section scripts{
 
     @{
@@ -52,4 +55,3 @@
         window.SearchResultApp && window.SearchResultApp.initialize && window.SearchResultApp.initialize();
     </script>
 }
-
