@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GetSearchResultsApp.Model.Interfaces;
 using GetSearchResultsApp.ViewModels;
 
@@ -87,20 +88,29 @@ namespace GetSearchResultsApp.Model
             if (zestimate.amount != null)
             {
                 estimate.Amount = SafeConvertToDecimal(zestimate.amount.Value);
+                estimate.AmountString = ToCurrencyString(estimate.Amount);
                 estimate.Currency = zestimate.amount.currency.ToString();
             }
 
             if (zestimate.valuationRange != null)
             {
                 estimate.HighValuation = SafeConvertToDecimal(zestimate.valuationRange.high?.Value);
+                estimate.HighValuationString = ToCurrencyString(estimate.HighValuation);
+
                 estimate.LowValuation = SafeConvertToDecimal(zestimate.valuationRange.low?.Value);
+                estimate.LowValuationString = ToCurrencyString(estimate.LowValuation);
             }
 
             if (zestimate.valueChange != null)
             {
                 estimate.ValueChange = SafeConvertToDecimal(zestimate.valueChange.Value);
-                estimate.ValueChangeDuration = zestimate.valueChange.duration;
+
+                estimate.ValueChangeString = estimate.ValueChange.HasValue
+                    ? ToCurrencyString(Math.Abs(estimate.ValueChange.Value))
+                    : string.Empty;
+
                 estimate.ValueDown = estimate.ValueChange < 0;
+                estimate.ValueChangeDuration = zestimate.valueChange.duration;
             }
 
             return estimate;
@@ -138,6 +148,12 @@ namespace GetSearchResultsApp.Model
                 return output;
             }
             return default(decimal?);
+        }
+
+        private static string ToCurrencyString(decimal? number)
+        {
+            //NOTE: The api docs says everything is in "$". So i am just formatting it to currency and ignoring the"Currency field" 
+            return number?.ToString("C0") ?? string.Empty;
         }
     }
 }

@@ -37,13 +37,13 @@
                     <div class="panel-heading">Zestimate</div>
                     <div class="panel-body">
                         {{#with zestimate}}
-                            <div class="row">Amount: {{currency}} {{amount}}</div>
-                            <div class="row">Range: {{currency}} {{lowValuation}} - {{highValuation}}</div>
+                            <div class="row">Amount: {{amountString}}</div>
+                            <div class="row">Range: {{lowValuationString}} - {{highValuationString}}</div>
                             {{#if valueChangeDuration}}    
                                 <div class="row">
                                     Change in {{valueChangeDuration}} days
                                     <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
-                                        {{valueChange}}
+                                        {{valueChangeString}}
                                     </span>
                                 </div>
                             {{/if}}
@@ -56,13 +56,13 @@
                         <div class="panel-heading">Rent Zestimate</div>
                         <div class="panel-body text-center">
                             {{#with rentZestimate}}
-                                <div class="row">Amount: {{currency}} {{amount}}</div>
-                                <div class="row">Range: {{currency}} {{lowValuation}} - {{highValuation}}</div>
+                                <div class="row">Amount: {{amountString}}</div>
+                                <div class="row">Range: {{lowValuationString}} - {{highValuationString}}</div>
                                 {{#if valueChangeDuration}}    
                                     <div class="row">
                                         Change in {{valueChangeDuration}} days
                                         <span class="label label-{{#if valueDown}}danger{{else}}success{{/if}}">
-                                            {{valueChange}}
+                                            {{valueChangeString}}
                                         </span>
                                     </div>
                                 {{/if}}

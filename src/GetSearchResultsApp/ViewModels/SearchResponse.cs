@@ -47,10 +47,17 @@ namespace GetSearchResultsApp.ViewModels
         public string Currency { get; set; }
 
         public decimal? Amount { get; set; }
+        public string AmountString { get; set; }
+
         public decimal? LowValuation { get; set; }
+        public string LowValuationString { get; set; }
+
         public decimal? HighValuation { get; set; }
+        public string HighValuationString { get; set; }
 
         public decimal? ValueChange { get; set; }
+        public string ValueChangeString { get; set; }
+
         public string ValueChangeDuration { get; set; }
         public bool? ValueDown { get; set; }
     }
