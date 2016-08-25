@@ -17,16 +17,16 @@
                         </div>
                         {{#with links}}
                             <div class="row">
-                                <a target="_blank" href="{{comparablesLinks}}">Comparable Properties</a>
+                                <a rel="noopener" target="_blank" href="{{comparablesLinks}}">Comparable Properties</a>
                             </div>
                             <div class="row">
-                                <a target="_blank" href="{{graphsAndDataLink}}">Graphs And Data</a>
+                                <a rel="noopener" target="_blank" href="{{graphsAndDataLink}}">Graphs And Data</a>
                             </div>
                             <div class="row">
-                                <a target="_blank" href="{{homeDetailsLink}}">Home Details</a>
+                                <a rel="noopener" target="_blank" href="{{homeDetailsLink}}">Home Details</a>
                             </div>
                             <div class="row">
-                                <a target="_blank" href="{{mapThisHomeLink}}">Map This</a>
+                                <a rel="noopener" target="_blank" href="{{mapThisHomeLink}}">Map This</a>
                             </div>
                         {{/with}}
                     </div>
@@ -77,7 +77,7 @@
                     {{#with this}}
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <a target="_blank" href="{{overViewLink}}">
+                                <a rel="noopener" target="_blank" href="{{overViewLink}}">
                                     <small class="text-capitalize">{{type}}</small>: <strong>{{name}}</strong>
                                 </a>
                             </div>
@@ -86,10 +86,10 @@
                                     ZIndex Value: {{#if zindexValue}}{{zindexValueString}}{{else}}None{{/if}}
                                 </div>
                                 <div class="row">
-                                    <a target="_blank" href="{{forSaleLink}}">For Sale</a>
+                                    <a rel="noopener" target="_blank" href="{{forSaleLink}}">For Sale</a>
                                 </div>
                                 <div class="row">
-                                    <a target="_blank" href="{{forSaleByOwnerLink}}">For Sale By Owners</a>
+                                    <a rel="noopener" target="_blank" href="{{forSaleByOwnerLink}}">For Sale By Owners</a>
                                 </div>
                             </div>
                         </div>
