@@ -1,7 +1,5 @@
 # GetSearchResultsApp
 Get Search Results App
 
-## Installation
-
-TODO: Describe the installation process
-
+### Framework
+ASP.NET Core 1.0
